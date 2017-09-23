@@ -2,6 +2,7 @@ import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { createContainer } from 'react-meteor-data';
 import __ from 'lodash';
+import moment from 'moment';
 import { Tasks } from '../api/tasks';
 var request = require('request');
 
@@ -117,90 +118,26 @@ export default class Task extends React.Component {
 
     render() {
         let {layouts, users, t} = this.props;
-        let data = __.cloneDeep(this.props.tasks);
+        let data = __.cloneDeep(this.props.data.history);
         if (!data) {
             return (
                 <div className="spinner spinner-lg"></div>
             );
         } else {
+            __.forEach(data, (item, idx) => {
+              item['index'] = (idx + 1);
+            });
             let columnDefs= [
                 {
-                  headerName: '', field:'', minWidth: 56, width: 56, cellClass: 'agaction', pinned: 'left', filter: '', dontAdd: true,
-                  cellRendererFramework:(params)=>{
-                    return (
-                        <div style={{width: '100%'}}>
-                          <button className="btn btn-primary" style={{borderWidth: 0, width: 56, marginTop: -5, marginLeft: -5}}>{!params.data.checked ? 'Khóa' : 'Mở'}</button>
-                        </div>
-                    );
-                  },
+                  headerName: 'STT', field:'index', minWidth: 100, width: 100, maxWidth: 100, cellClass: 'agaction', pinned: 'left', filter: '', dontAdd: true,
                   cellStyle: (params) => {
                       if (params.node.data.gridType == 'footer') {
                           return {display: 'none'};
                       }
                   },
-                  onCellClicked: (params) => {
-                    if(params.data.checked) {
-                      request('http://' + params.data.ip + '/' + 'unLock', function (error, response, body) {
-                      });
-                      Tasks.update({_id: params.data._id}, { $set: { checked: false } });
-                    } else {
-                        request('http://' + params.data.ip + '/' + 'lock', function (error, response, body) {
-                        });
-                        Tasks.update({_id: params.data._id}, { $set: { checked: true } });
-                    }
-                    // Set the checked property to the opposite of its current value
-                  }
                 },
                 {
-                  headerName: '', field:'', minWidth: 56, width: 56, cellClass: 'agaction', pinned: 'left', filter: '', dontAdd: true,
-                  cellRendererFramework:(params)=>{
-                    return (
-                        <div style={{width: '100%'}}>
-                          <button className="btn btn-primary" style={{borderWidth: 0, width: 56, marginTop: -5, marginLeft: -5}}>{'Chi tiết'}</button>
-                        </div>
-                    );
-                  },
-                  cellStyle: (params) => {
-                      if (params.node.data.gridType == 'footer') {
-                          return {display: 'none'};
-                      }
-                  },
-                  onCellClicked: (params) => {
-                    if(params.data && params.data._id){
-                      this.props.getDetail(params.data);
-                    }
-                  }
-                },
-                {
-                    headerName: 'Tên thiết bị', field: "deviceName",
-                    filterParams: {filterOptions: ['contains', 'notContains', 'startsWith', 'endsWith']},
-                    width: 300, editable: (params) => {
-                        if (params.node.data.gridType == 'footer') {
-                            return false;
-                        } else {
-                            return perUpdate;
-                        }
-                    },  cellStyle: function(params) {
-                            if (params.node.data.gridType == 'footer') {
-                                //mark police cells as red
-                                return {fontWeight: 'bold'};
-                            } else {
-                                return null;
-                            }
-                        }, suppressMenu: true, required: true, filter: 'text'
-                },
-                {
-                    headerName: 'Tên khách hàng', field: "customerName",
-                    filterParams: {filterOptions: ['contains', 'notContains', 'startsWith', 'endsWith']}, width: this.state.width, editable: (params) => {
-                        if (params.node.data.gridType == 'footer') {
-                            return false;
-                        } else {
-                            return perUpdate;
-                        }
-                    }, suppressMenu: true, required: true, filter: 'text'
-                },
-                {
-                    headerName: 'Địa chỉ ip', field: "ip",
+                    headerName: 'Trạng thái', field: "action",
                     filterParams: {filterOptions: ['contains', 'notContains', 'startsWith', 'endsWith']}, width: this.state.width, editable: (params) => {
                         if (params.node.data.gridType == 'footer') {
                             return false;
@@ -210,15 +147,15 @@ export default class Task extends React.Component {
                     }, suppressMenu: true, required: false, filter: 'text'
                 },
                 {
-                    headerName: 'Trạng thái', field: "checked", width: 300,
+                    headerName: 'Thời gian', field: "time", width: 300,
                     cellRenderer: function(params) {
                       if(params.node.data.gridType == 'footer') {
                         return '';
                       } else {
                           if(params.value) {
-                            return 'Khóa';
+                            return moment(params.value).format('DD/MM/YYYY hh:mm');
                           } else {
-                            return 'Mở';
+                            return '';
                           }
                       }
                     }

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Tasks } from '../imports/api/tasks.js';
 
 if (Meteor.isServer) {
@@ -7,7 +8,6 @@ if (Meteor.isServer) {
     useDefaultAuth: true,
     prettyJson: true
   });
-
 
   // Generates: GET, POST on /api/items and GET, PUT, DELETE on
   // /api/items/:id for the Items collection
@@ -31,28 +31,30 @@ if (Meteor.isServer) {
   // });
 
   // Maps to: /api/articles/:id
-  Api.addRoute('controlIOT/:ip', {authRequired: false}, {
+  Api.addRoute('controlIOT/:data', {authRequired: false}, {
     get: function () {
-      console.log('abc def ', this.urlParams.ip);
-      if(Tasks.find({ip: this.urlParams.ip}).count() === 0) {
-        Tasks.insert({
-          ip: this.urlParams.ip,
-          text: this.urlParams.ip,
-          checked: false
-        })
+      let json = JSON.parse(this.urlParams.data);
+      json['checked'] = false;
+      json['history'] = [];
+      if(Tasks.find({deviceName: json.deviceName}).count() === 0) {
+        Tasks.insert(json);
+      } else {
+          Tasks.update({deviceName: json.deviceName}, {$set: {
+            ip: json.ip,
+          }});
+          Tasks.update({deviceName: json.deviceName}, {$push: {
+            history: {
+              action: json.action,
+              user: 'Người dùng',
+              time: moment().valueOf()
+            },
+          }});
       }
-      return this.urlParams.ip;
+      return this.urlParams.data;
     },
     delete: {
       roleRequired: ['author', 'admin'],
       action: function () {
-        // if (Articles.remove(this.urlParams.id)) {
-        //   return {status: 'success', data: {message: 'Article removed'}};
-        // }
-        // return {
-        //   statusCode: 404,
-        //   body: {status: 'fail', message: 'Article not found'}
-        // };
       }
     }
   });

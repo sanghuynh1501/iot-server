@@ -5,11 +5,16 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "ag-grid": "^10.1.0",
+    "ag-grid-react": "^10.1.0",
     "classnames": "^2.2.3",
+    "lodash": "^4.17.4",
     "meteor-node-stubs": "~0.2.0",
+    "moment": "^2.18.1",
     "react": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-meteor-data": "^0.2.10",
     "request": "^2.81.0"
   }
 }
