@@ -35,12 +35,27 @@
     </div>
   </div>
   <script type="text/javascript">
-  var map = L.eeGeo.map("map", "fd83c1cfc3b1317a0c697927fd36ef53", {
-    center: [12.266655,-250.793281],
-    zoom: 15,
-    indoorsEnabled: true,
-    coverageTreeManifest: "https://webgl-cdn1.wrld3d.com/chunk/indoor_maps/api_requests/EIM-575e2d9a-8186-4005-9696-6a4acaac1356_2017_09_23_08_53_27/webgl_manifest.bin.gz"
-  });
+    var map = L.Wrld.map("map", "fd83c1cfc3b1317a0c697927fd36ef53", {
+      center: [12.269016881489472, 109.202015896930888],
+      zoom: 15,
+      indoorsEnabled: true,
+      coverageTreeManifest: "https://webgl-cdn1.wrld3d.com/chunk/indoor_maps/api_requests/EIM-3e83a79a-75e2-41fc-ad03-4fbb2b84e02b_2017_09_27_08_14_17/webgl_manifest.bin.gz"
+    })
+
+    var myIcon = L.icon({
+    	iconUrl: 'camera.png',
+    	iconRetinaUrl: '/camera.png',
+    	iconSize: [38, 40],
+    	iconAnchor: [22, 94],
+    	popupAnchor: [-3, -76]
+    });
+
+    var marker = L.marker([12.269016881489472, 109.202015896930888], {
+        title: "camera 01",
+        indoorMapId: "EIM-3e83a79a-75e2-41fc-ad03-4fbb2b84e02b",
+        indoorMapFloorIndex: 0,
+        icon: myIcon
+      }).addTo(map);
   </script>
   <div id="render-target"></div>
 </body>
