@@ -1,0 +1,46 @@
+{
+	"id": "dormitory_k5",
+	"name": "KTX K5",
+	"owner": "s2corp",
+	"location": {
+		"type": "Point",
+		"coordinates": [109.2011849878606, 12.268973320538016]
+	},
+	"levels": [
+		{
+			"id": "k5_floor_1",
+			"name": "1",
+			"readable_name": "First floor",
+			"z_order": 0,
+			"filename": "k5_floor_1.geojson"
+		},
+		{
+			"id": "k5_floor_2",
+			"name": "2",
+			"readable_name": "Second floor",
+			"z_order": 1,
+			"filename": "k5_floor_2.geojson"
+		},
+		{
+			"id": "k5_floor_3",
+			"name": "3",
+			"readable_name": "Third floor",
+			"z_order": 2,
+			"filename": "k5_floor_3.geojson"
+		},
+		{
+			"id": "k5_floor_4",
+			"name": "4",
+			"readable_name": "Fourth floor",
+			"z_order": 3,
+			"filename": "k5_floor_4.geojson"
+		},
+		{
+			"id": "k5_floor_5",
+			"name": "5",
+			"readable_name": "Fifth floor",
+			"z_order": 4,
+			"filename": "k5_floor_5.geojson"
+		}
+	]
+}

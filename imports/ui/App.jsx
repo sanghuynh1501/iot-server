@@ -6,6 +6,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Tasks } from '../api/tasks.js';
 import Task from './Task.jsx';
 import Detail from './Detail.jsx';
+import Building from './Building.jsx';
 
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/theme-fresh.css';
@@ -44,13 +45,15 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>Danh sách thiết bị</h1>
+          {/*<h1>Danh sách thiết bị</h1>*/}
+          <h1>Bản đồ KTX</h1>
         </header>
-        {
+        {/*
           this.state.detailData ?
           <Detail data={this.state.detailData} /> :
           <Task tasks={this.props.tasks} getDetail={this.getDetailData.bind(this)}/>
-        }
+        */}
+        <Building/>
       </div>
     );
   }
