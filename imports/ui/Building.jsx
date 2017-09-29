@@ -131,7 +131,7 @@ export default class BuildingManage extends React.Component {
       center: [12.269016881489472, 109.202015896930888],
       zoom: 15,
       indoorsEnabled: true,
-      coverageTreeManifest: 'https://webgl-cdn1.wrld3d.com/chunk/indoor_maps/api_requests/EIM-703a10f2-e23e-4981-81bf-579497b46217_2017_09_29_02_36_39/webgl_manifest.bin.gz'
+      coverageTreeManifest: "https://webgl-cdn1.wrld3d.com/chunk/indoor_maps/api_requests/EIM-703a10f2-e23e-4981-81bf-579497b46217_2017_09_29_09_37_13/webgl_manifest.bin.gz"
     });
     this.setState({buildingSource: {
       id: 'K5',
