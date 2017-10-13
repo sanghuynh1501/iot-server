@@ -17,7 +17,7 @@ Tasks.allow({
 });
 
 if (Meteor.isServer) {
-  Meteor.publish('tasks', function tasksPublication() {
+  Meteor.publish('', function tasksPublication() {
     return Tasks.find({
       $or: [
         { private: { $ne: true } },

@@ -7,7 +7,10 @@
   "dependencies": {
     "ag-grid": "^10.1.0",
     "ag-grid-react": "^10.1.0",
+    "babel-runtime": "^6.26.0",
+    "bcrypt": "^1.0.3",
     "classnames": "^2.2.3",
+    "leaflet.coordinates": "^0.1.5",
     "lodash": "^4.17.4",
     "meteor-node-stubs": "~0.2.0",
     "moment": "^2.18.1",

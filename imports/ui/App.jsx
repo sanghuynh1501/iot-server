@@ -42,6 +42,7 @@ class App extends Component {
   // }
 
   render() {
+    console.log('task ', this.props.tasks);
     return (
       <div className="container">
         <header>
